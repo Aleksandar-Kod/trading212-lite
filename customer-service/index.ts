@@ -3,17 +3,22 @@ import express, { Express, Request, Response } from "express";
 import session from "express-session";
 import { uuid } from "uuidv4";
 import { Countries } from "./repositories/Countries";
+import { CountryT } from "./models/Country";
+import Customers from "./repositories/Customers";
 import CustomersFileRepository from "./repositories/Customers";
 import { isValidishEmail } from "./validations/email";
 import { containsOnlyLatinCharacters } from "./validations/names";
+import { writeFile, readFile, appendFile } from 'fs'
+import fs from 'fs'
+import { json } from 'stream/consumers';
 
 const app: Express = express();
-const port = 4242;
+const port = 8081;
 
 CustomersFileRepository.init();
 
 const sessionConfig = {
-  secret: "my_corgi_is_annoying",
+  secret: "big secret",
   saveUninitialized: true,
 };
 
